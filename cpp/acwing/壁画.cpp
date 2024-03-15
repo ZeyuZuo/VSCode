@@ -1,9 +1,4 @@
-#define _CRT_SECURE_NO_WARNINGS 1
-#include<iostream>
-#include<cstring>
-#include<vector>
-#include<algorithm>
-#include<cmath>
+#include<bits/stdc++.h>
 using namespace std;
 
 const int N = 5000010;
