@@ -1,11 +1,4 @@
-#define _CRT_SECURE_NO_WARNINGS 1
-#include<iostream>
-#include<cstring>
-#include<vector>
-#include<map>
-#include<set>
-#include<algorithm>
-#include<cmath>
+#include<bits/stdc++.h>
 #define N 100010
 using namespace std;
 
@@ -18,6 +11,6 @@ int main()
 	cin >> n;
 	for (int i = 0; i < n; i++)
 		scanf("%d%d", &a[i], &b[i]);
-
+	
 	return 0;
 }
