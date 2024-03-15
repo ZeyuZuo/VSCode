@@ -1,3 +1,10 @@
+/*
+* @acwing app=acwing.cn id=1238 lang=C++
+*
+* 1236. 递增三元组
+*/
+
+// @acwing code start
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -56,3 +63,4 @@ int main()
 	cout << sum << endl;
 	return 0;
 }
+// @acwing code end

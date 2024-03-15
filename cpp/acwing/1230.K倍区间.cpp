@@ -1,9 +1,11 @@
-#define _CRT_SECURE_NO_WARNINGS 1
-#include<iostream>
-#include<cstring>
-#include<vector>
-#include<algorithm>
-#include<cmath>
+/*
+* @acwing app=acwing.cn id=1232 lang=C++
+*
+* 1230. K倍区间
+*/
+
+// @acwing code start
+#include<bits/stdc++.h>
 using namespace std;
 
 const int N = 100010;
@@ -30,3 +32,5 @@ int main()
 	cout << sum + brr[0];
 	return 0;
 }
+
+// @acwing code end
