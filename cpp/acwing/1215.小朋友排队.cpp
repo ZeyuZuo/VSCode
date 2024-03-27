@@ -4,18 +4,18 @@
 * 1215. 小朋友排队
 */
 
-// @acwing code start
 /**
  * @author: Zeyu Zuo
- * @date: 2024-03-25 16:11:24
+ * @date: 2024-03-25 19:26:04
  */
 #include<bits/stdc++.h>
 using namespace std;
+typedef long long LL;
 
 #define N 100010
 int n;
-long long ans=0;
-long long b[N]={0};
+LL ans=0;
+LL b[N]={0};
 int a[N],c[N];
 
 
@@ -56,6 +56,8 @@ void merge(int arr[],int l,int mid,int r)
     while(j<=r){
         tmp.push_back(arr[j++]);
     }
+    for(int i=0;i<tmp.size();i++)
+        arr[l+i]=tmp[i];
 }
 
 void merge_sort(int arr[],int l,int r)
@@ -75,16 +77,11 @@ int main()
     for(int i=0;i<n;i++)
         scanf("%d",&a[i]);
     work(a);
-    // for(int i=0;i<n;i++)
-    //     cout<<a[i]<<" ";
-    // cout<<endl;
+
     merge_sort(a,0,n-1);
 
-    for(int i=0;i<n;i++){
+    for(int i=0;i<n;i++)
         ans+=(b[i]+1)*b[i]/2;
-        cout<<b[i]<<" ";
-    }
-    cout<<endl;
 
     cout<<ans;
     return 0;
