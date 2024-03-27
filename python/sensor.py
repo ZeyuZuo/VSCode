@@ -9,8 +9,8 @@ def main ():
 
         send_data={
             "device":"test",
-            "time":i,
-            "temperature":temper
+            "time":str(i),
+            "temperature":str(temper)
             }
         send_data=json.dumps(send_data)
         print(send_data)
