@@ -22,6 +22,7 @@ def main ():
         #  关闭套接字
         udp_socket.close()
 
+    
 
 if __name__ == '__main__':
     main()
