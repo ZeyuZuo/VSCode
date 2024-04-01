@@ -14,9 +14,11 @@ x = list()
 y = list()
 
 for i in range(1, length_zu):  # 从第二行开始读取
-    x.append(Data[i][1])  # 将第一列数据从第二行读取到最后一行赋给列表x
-    y.append(Data[i][2])  # 将第二列数据从第二行读取到最后一行赋给列表
+    x.append(int(Data[i][1]))  # 将第一列数据从第二行读取到最后一行赋给列表x
+    y.append(int(Data[i][2]))  # 将第二列数据从第二行读取到最后一行赋给列表
 
 plt.plot(x,y)  # 绘制x,y的折线图
+plt.xlabel('time')
+plt.ylabel('temperature')
 plt.show()  # 显示折线图
 

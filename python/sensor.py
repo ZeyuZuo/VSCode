@@ -5,7 +5,7 @@ from datetime import datetime
 
 def main ():
     for i in range(0,30):
-        temper=random.randint(-30,50)
+        temper=random.randint(0,30)
 
         send_data={
             "device":"test",
