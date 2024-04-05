@@ -26,6 +26,7 @@ root@petalinux:~# echo $LD_LIBRARY_PATH
 
 这时候再make db_bench，编译需要3小时，然后./db_bench，编译确实很久，所以很花时间
 
+sd卡运行结果
 ```
 root@petalinux:~/rocksdb_new# ./bench
 Set seed to 1712161839221523 because --seed was 0
@@ -62,4 +63,38 @@ Release 2020.1   Apr  3 2024  -  10:31:36
 NOTICE:  ATF running on XCZU2CG/silicon v4/RTL5.1 at 0xfffea000
 NOTICE:  BL31: v2.2(release):v1.1-5588-g5918e656e
 NOTICE:  BL31: Built : 10:28:51, Apr  3 2024
+```
+
+nvme运行结果
+```
+root@petalinux:/media/ssd/rocksdb_new# ./db_bench
+Set seed to 1712345123703628 because --seed was 0
+Initializing RocksDB Options from the specified file
+Initializing RocksDB Options from command-line flags
+Integrated BlobDB: blob cache disabled
+RocksDB:    version 8.11.3
+Date:       Fri Apr  5 19:25:23 2024
+CPU:        0 * 
+CPUCache:   
+Keys:       16 bytes each (+ 0 bytes user-defined timestamp)
+Values:     100 bytes each (50 bytes after compression)
+Entries:    1000000
+Prefix:    0 bytes
+Keys per prefix:    0
+RawSize:    110.6 MB (estimated)
+FileSize:   62.9 MB (estimated)
+Write rate: 0 bytes/second
+Read rate: 0 ops/second
+Compression: Snappy
+Compression sampling rate: 0
+Memtablerep: SkipListFactory
+Perf Level: 1
+WARNING: Assertions are enabled; benchmarks unnecessarily slow
+------------------------------------------------
+Initializing RocksDB Options from the specified file
+Initializing RocksDB Options from command-line flags
+Integrated BlobDB: blob cache disabled
+DB path: [/tmp/rocksdbtest-0/dbbench]
+fillseq      :      29.857 micros/op 33493 ops/sec 29.857 seconds 1000000 operations;    3.7 MB/s
+Please disable_auto_compactions in FillDeterministic benchmark
 ```
