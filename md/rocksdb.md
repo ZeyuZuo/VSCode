@@ -1,5 +1,6 @@
 # 在petalinux上运行rocksdb
 这个过程花了我很长时间，我在2024-4-3 17：08跑出来了rocksdb，然后开始跑db_bench，这个过程花了两天，因为编译一次需要3小时，而有的问题出现了，需要重新编译，有时候甚至编译出现问题
+linux上可以安装tio来当ssh，很方便
 现在是2024-4-5 16：57，我在这段时间碰到了不少问题，有的可能忘记了，我把我记得的写下来
 ## make static_lib && make install-static
 重点是指定librocksdb.a的位置，别的好像没啥
