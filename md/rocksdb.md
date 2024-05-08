@@ -98,3 +98,6 @@ DB path: [/tmp/rocksdbtest-0/dbbench]
 fillseq      :      29.857 micros/op 33493 ops/sec 29.857 seconds 1000000 operations;    3.7 MB/s
 Please disable_auto_compactions in FillDeterministic benchmark
 ```
+
+两次测试结果接近，用top看是什么瓶颈
+因为只有一个终端，所以我下载了screen，结果不管在sd还是在nvme，cpu都是100%，应该是cpu瓶颈
