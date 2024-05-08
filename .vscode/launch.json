@@ -2,6 +2,13 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "java.singleton.Main",
+            "projectName": "VSCode_5f39a680"
+        },
+        {
             "name": "(gdb) Launch",
             "preLaunchTask": "g++.exe build active file",
             "type": "cppdbg",
@@ -26,7 +33,7 @@
             "name": "C/C++: g++.exe 生成和调试活动文件",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${fileDirname}\\exe\\test.exe", // ${fileBasenameNoExtension}
+            "program": "${fileDirname}\\exe\\test.exe",
             "args": [],
             "stopAtEntry": false,
             "cwd": "D:/mingw64/bin",
