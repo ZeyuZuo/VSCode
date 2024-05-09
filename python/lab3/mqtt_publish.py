@@ -6,7 +6,7 @@ import json
 from paho.mqtt import client as mqtt_client
 
 
-broker = '47.236.122.23'
+broker = '127.0.0.1'
 port = 1883
 topic = "zzy/mqtt"
 # Generate a Client ID with the publish prefix.
