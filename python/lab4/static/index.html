@@ -28,7 +28,7 @@
         var chartNormalized = echarts.init(document.getElementById('mainNormalized'));
 
         function fetchData() {
-            fetch('/data').then(response => response.json()).then(data => {
+            fetch('http://127.0.0.1:5000/data').then(response => response.json()).then(data => {
                 console.log(data); 
                 function normalize(values) {
                     let max = Math.max(...values);

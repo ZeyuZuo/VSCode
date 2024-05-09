@@ -42,15 +42,15 @@ def data():
         # 温度 > 35°C 或 < 10°C
         # 湿度 > 80% 或 < 20%
         # 气压 > 1025 hPa 或 < 990 hPa
-        alert_condition = (
-            (sensor_type == 'sensor/temperature' and (value > 35 or value < 10)) or
-            (sensor_type == 'sensor/humidity' and (value > 80 or value < 20)) or
-            (sensor_type == 'sensor/pressure' and (value > 1025 or value < 990))
-        )
-        if alert_condition:
-            alert_message = f"Alert: {sensor_type} at {formatted_timestamp} is {value}"
-            alerts.append(alert_message)
-            send_dingtalk_message(alert_message, sensor_type, timestamp, value)
+        # alert_condition = (
+        #     (sensor_type == 'sensor/temperature' and (value > 35 or value < 10)) or
+        #     (sensor_type == 'sensor/humidity' and (value > 80 or value < 20)) or
+        #     (sensor_type == 'sensor/pressure' and (value > 1025 or value < 990))
+        # )
+        # if alert_condition:
+        #     alert_message = f"Alert: {sensor_type} at {formatted_timestamp} is {value}"
+        #     alerts.append(alert_message)
+        #     send_dingtalk_message(alert_message, sensor_type, timestamp, value)
         result[sensor_type].append({'timestamp': formatted_timestamp, 'value': value})
     
     if alerts:
