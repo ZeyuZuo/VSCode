@@ -33,11 +33,7 @@
             //     'Content-Type': 'application/json'
             // });
             // Response body is not available to scripts (Reason: CORS Missing Allow Origin)
-            headers = {
-                'Access-Control-Allow-Origin': '*',
-                'Content-Type': 'application/json'
-            }
-            fetch('http://127.0.0.1:5000/data', headers).then(response => response.json()).then(data => {
+            fetch('http://127.0.0.1:5000/data').then(response => response.json()).then(data => {
                 console.log(data); 
                 function normalize(values) {
                     let max = Math.max(...values);

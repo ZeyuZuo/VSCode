@@ -32,6 +32,11 @@ def send_dingtalk_message(message, sensor_type, timestamp, value):
     msg = 'Alert: ' + message + ' at ' + timestamp.strftime('%Y-%m-%d %H:%M:%S') + ' is ' + str(value) + ' !'
     xiaoding.send_text(msg=msg)
 
+@app.after_request
+def add_cors_headers(response):
+    response.headers['Access-Control-Allow-Origin'] = '*'  # 允许所有来源访问，也可以设置为具体的来源
+    return response
+
 @app.route('/data')
 def data():
     sensor_data = get_data()
