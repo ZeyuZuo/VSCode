@@ -5,7 +5,7 @@ from mysql.connector import Error
 from paho.mqtt import client as mqtt_client
 
 # MQTT服务器的配置参数
-broker = '127.0.0.1'
+broker = '47.106.117.242'
 port = 1883
 topics = {
     "sensor/temperature": "sensor/temperature",
@@ -18,8 +18,8 @@ client_id = f'subscribe-{random.randint(0, 100)}'
 db_config = {
     'host': 'localhost',
     'user': 'root',
-    'password': 'zzy123456',
-    'database': 'mqtt'
+    'password': 'renyu20031205.',
+    'database': 'SensorData'
 }
 
 def connect_mqtt() -> mqtt_client:
@@ -32,7 +32,7 @@ def connect_mqtt() -> mqtt_client:
         else:
             print(f"Failed to connect, return code {rc}\n")
 
-    client = mqtt_client.Client(client_id)
+    client = mqtt_client.Client(mqtt_client.CallbackAPIVersion.VERSION1,client_id)
     client.on_connect = on_connect
     client.connect(broker, port)
     return client
@@ -41,7 +41,7 @@ def store_data(sensor_type, value):
     try:
         conn = mysql.connector.connect(**db_config)
         cursor = conn.cursor()
-        query = "INSERT INTO data (timestamp, sensor_type, value) VALUES (NOW(), %s, %s)"
+        query = "INSERT INTO sensor_data (timestamp, sensor_type, value) VALUES (NOW(), %s, %s)"
         cursor.execute(query, (sensor_type, value))
         conn.commit()
         cursor.close()

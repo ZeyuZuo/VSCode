@@ -4,14 +4,14 @@ import json
 import time 
 
 # MQTT服务器的配置参数
-broker = '127.0.0.1'  # MQTT代理服务器的IP地址
+broker = '47.106.117.242'  # MQTT代理服务器的IP地址
 port = 1883  # MQTT使用的端口号，默认为1883
 topics = {
     "sensor/temperature": "sensor/temperature",
     "sensor/humidity": "sensor/humidity",
     "sensor/pressure": "sensor/pressure"
 }  # MQTT主题，用于发布消息
-client_id = f'mqtt-{random.randint(0, 1000)}'  # 客户端ID，随机生成以避免冲突
+client_id = f'python-mqtt-{random.randint(0, 1000)}'  # 客户端ID，随机生成以避免冲突
 
 def generate_sensor_data():
     data = {
@@ -28,7 +28,7 @@ def connect_mqtt():
         else:
             print(f"Failed to connect, return code {rc}\n")
 
-    client = mqtt_client.Client(client_id)
+    client = mqtt_client.Client(mqtt_client.CallbackAPIVersion.VERSION1, client_id)
     client.on_connect = on_connect
     client.connect(broker, port)
     return client
