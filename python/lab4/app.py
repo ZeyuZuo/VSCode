@@ -8,7 +8,7 @@ app = Flask(__name__)
 db_config = {
     'user': 'root',
     'password': 'zzy123456',
-    'host': 'localhost',
+    'host': '127.0.0.1',
     'database': 'mqtt',
     'raise_on_warnings': True
 }
