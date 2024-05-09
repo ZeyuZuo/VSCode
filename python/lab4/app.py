@@ -25,21 +25,11 @@ def get_data():
     return data
 
 def send_dingtalk_message(message, sensor_type, timestamp, value):
-    conn = mysql.connector.connect(**db_config)
-    cursor = conn.cursor()
-    # 检查是否已发送过同一警告
-    cursor.execute("SELECT id FROM sent_alerts WHERE sensor_type = %s AND timestamp = %s", (sensor_type, timestamp))
-    if cursor.fetchone() is None:
-        webhook = 'https://oapi.dingtalk.com/robot/send?access_token=54803e6bdc1a0bc438ecc97c1ace78f2eb7dfe101298ab24682618429cc0c320'
-        secret = 'SECbc64bc7f21cc7aba5cb444dbdedfd82b14aea021229f654c22c199a255c39cd5'  # 可选：创建机器人勾选“加签”选项时使用
-        xiaoding = DingtalkChatbot(webhook, secret=secret)
-        msg = 'Alert: ' + message + ' at ' + timestamp.strftime('%Y-%m-%d %H:%M:%S') + ' is ' + str(value) + ' !'
-        xiaoding.send_text(msg=msg)
-        # 记录警告
-        cursor.execute("INSERT INTO sent_alerts (sensor_type, value, timestamp) VALUES (%s, %s, %s)", (sensor_type, value, timestamp))
-        conn.commit()
-    cursor.close()
-    conn.close()
+    webhook = 'https://oapi.dingtalk.com/robot/send?access_token=54803e6bdc1a0bc438ecc97c1ace78f2eb7dfe101298ab24682618429cc0c320'
+    secret = 'SECbc64bc7f21cc7aba5cb444dbdedfd82b14aea021229f654c22c199a255c39cd5'  # 可选：创建机器人勾选“加签”选项时使用
+    xiaoding = DingtalkChatbot(webhook, secret=secret)
+    msg = 'Alert: ' + message + ' at ' + timestamp.strftime('%Y-%m-%d %H:%M:%S') + ' is ' + str(value) + ' !'
+    xiaoding.send_text(msg=msg)
 
 @app.route('/data')
 def data():
