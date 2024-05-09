@@ -5,7 +5,7 @@ from mysql.connector import Error
 from paho.mqtt import client as mqtt_client
 
 # MQTT服务器的配置参数
-broker = '47.106.117.242'
+broker = '127.0.0.1'
 port = 1883
 topics = {
     "sensor/temperature": "sensor/temperature",
@@ -18,7 +18,7 @@ client_id = f'subscribe-{random.randint(0, 100)}'
 db_config = {
     'host': 'localhost',
     'user': 'root',
-    'password': 'renyu20031205.',
+    'password': 'zzy123456',
     'database': 'SensorData'
 }
 

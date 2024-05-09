@@ -4,7 +4,7 @@ import json
 import time 
 
 # MQTT服务器的配置参数
-broker = '47.106.117.242'  # MQTT代理服务器的IP地址
+broker = '127.0.0.1'  # MQTT代理服务器的IP地址
 port = 1883  # MQTT使用的端口号，默认为1883
 topics = {
     "sensor/temperature": "sensor/temperature",
