@@ -1,4 +1,5 @@
 from flask import Flask, jsonify
+from flask_cors import CORS
 import mysql.connector
 from dingtalkchatbot.chatbot import DingtalkChatbot
 import requests
