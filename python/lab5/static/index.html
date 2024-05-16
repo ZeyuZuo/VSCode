@@ -35,53 +35,59 @@
             // Response body is not available to scripts (Reason: CORS Missing Allow Origin)
             fetch('http://127.0.0.1:5000/data').then(response => response.json()).then(data => {
                 console.log(data); 
-                function normalize(values) {
-                    let max = Math.max(...values);
-                    let min = Math.min(...values);
-                    if (max === min) return values.map(() => 0);
-                    return values.map(value => (value - min) / (max - min));
-                }
+                // function normalize(values) {
+                //     let max = Math.max(...values);
+                //     let min = Math.min(...values);
+                //     if (max === min) return values.map(() => 0);
+                //     return values.map(value => (value - min) / (max - min));
+                // }
 
-                var timestamps = data['sensor/temperature'].map(item => item.timestamp);
-                var tempData = data['sensor/temperature'].map(item => item.value);
-                var humidData = data['sensor/humidity'].map(item => item.value);
-                var pressData = data['sensor/pressure'].map(item => item.value);
+                var tempData = data['temperature']
+                var humidData = data['humidity']
+                var pressData = data['pressure']
 
-                var normalizedTemp = normalize(tempData);
-                var normalizedHumid = normalize(humidData);
-                var normalizedPress = normalize(pressData);
+                // var normalizedTemp = normalize(tempData);
+                // var normalizedHumid = normalize(humidData);
+                // var normalizedPress = normalize(pressData);
 
+                // 添加一个仪表盘
                 var option = {
-                    tooltip: { trigger: 'axis' },
-                    legend: { data: ['Temperature', 'Humidity', 'Pressure'] },
+                    title: {
+                        text: 'Sensor Data Visualization',
+                        subtext: 'Temperature, Humidity, Pressure'
+                    },
+                    tooltip: {
+                        trigger: 'axis'
+                    },
+                    legend: {
+                        data: ['Temperature', 'Humidity', 'Pressure']
+                    },
                     xAxis: {
                         type: 'category',
-                        data: timestamps,
-                        axisLabel: { rotate: 45 }
+                        data: data['time']
                     },
-                    yAxis: { type: 'value' },
+                    yAxis: {
+                        type: 'value'
+                    },
                     series: [
-                        { name: 'Temperature', type: 'line', data: tempData },
-                        { name: 'Humidity', type: 'line', data: humidData },
-                        { name: 'Pressure', type: 'line', data: pressData }
+                        {
+                            name: 'Temperature',
+                            type: 'line',
+                            data: tempData
+                        },
+                        {
+                            name: 'Humidity',
+                            type: 'line',
+                            data: humidData
+                        },
+                        {
+                            name: 'Pressure',
+                            type: 'line',
+                            data: pressData
+                        }
                     ]
                 };
-
-                var optionNormalized = {
-                    tooltip: { trigger: 'axis' },
-                    legend: { data: ['Normalized Temperature', 'Normalized Humidity', 'Normalized Pressure'] },
-                    xAxis: {
-                        type: 'category',
-                        data: timestamps,
-                        axisLabel: { rotate: 45 }
-                    },
-                    yAxis: { type: 'value' },
-                    series: [
-                        { name: 'Normalized Temperature', type: 'line', data: normalizedTemp },
-                        { name: 'Normalized Humidity', type: 'line', data: normalizedHumid },
-                        { name: 'Normalized Pressure', type: 'line', data: normalizedPress }
-                    ]
-                };
+                
 
                 chart.setOption(option);
                 chartNormalized.setOption(optionNormalized);
