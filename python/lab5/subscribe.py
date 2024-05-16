@@ -44,7 +44,8 @@ def store_data(sensor_type, value):
         # sensor_type去掉引号
         sensor_type = sensor_type.replace("'", "")
         cursor = conn.cursor()
-        query = "INSERT INTO %s VALUES (%s)"
+        query = "INSERT INTO %s (value) VALUES (%s)"
+        print(query, (sensor_type, value))
         cursor.execute(query, (sensor_type, value))
         conn.commit()
         cursor.close()
