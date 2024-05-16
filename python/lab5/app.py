@@ -20,7 +20,7 @@ db_config = {
 def get_data(type):
     conn = mysql.connector.connect(**db_config)
     cursor = conn.cursor()
-    query = "SELECT value FROM " + type + " ORDERED BY id DESC LIMIT 1"
+    query = "SELECT value FROM " + type + " ORDER BY id DESC LIMIT 1"
     cursor.execute(query)
     data = cursor.fetchall()
     conn.close()
