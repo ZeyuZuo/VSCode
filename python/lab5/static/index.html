@@ -1,107 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.bootcdn.net/ajax/libs/echarts/5.0.2/echarts.min.js"></script>
-    <title>Sensor Data Visualization</title>
-    <style>
-        body {
-            background-image: url('./image/bg.jpg'); 
-            background-size: cover; 
-            background-position: center; 
-            background-repeat: no-repeat; 
-        }
-        #main, #mainNormalized {
-            width: 49%;
-            height: 600px;
-            display: inline-block;
-            vertical-align: top;
-        }
-    </style>
+<meta charset="UTF-8">
+<title>Gauge Dashboard</title>
+<script src="https://cdn.jsdelivr.net/npm/justgage"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.3.0/raphael.min.js"></script>
+<style>
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #333;
+  }
+  #gauge {
+    width: 300px;
+    height: 300px;
+  }
+</style>
 </head>
 <body>
-    <div id="main"></div>
-    <div id="mainNormalized"></div>
-    <script>
-        var chart = echarts.init(document.getElementById('main'));
-        var chartNormalized = echarts.init(document.getElementById('mainNormalized'));
+<div id="gauge"></div>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const g = new JustGage({
+      id: 'gauge',
+      value: 0,
+      min: 0,
+      max: 2,
+      title: "Sensor Reading",
+      label: "Value",
+      levelColors: ["#00fff6", "#ff00fc", "#1200ff"]
+    });
 
-        function fetchData() {
-            // Headers = new Headers({
-            //     'Access-Control-Allow-Origin': '*',
-            //     'Content-Type': 'application/json'
-            // });
-            // Response body is not available to scripts (Reason: CORS Missing Allow Origin)
-            fetch('http://127.0.0.1:5000/data').then(response => response.json()).then(data => {
-                console.log(data); 
-                // function normalize(values) {
-                //     let max = Math.max(...values);
-                //     let min = Math.min(...values);
-                //     if (max === min) return values.map(() => 0);
-                //     return values.map(value => (value - min) / (max - min));
-                // }
-
-                var tempData = data['temperature']
-                var humidData = data['humidity']
-                var pressData = data['pressure']
-
-                // var normalizedTemp = normalize(tempData);
-                // var normalizedHumid = normalize(humidData);
-                // var normalizedPress = normalize(pressData);
-
-                // 添加一个仪表盘
-                var option = {
-                    title: {
-                        text: 'Sensor Data Visualization',
-                        subtext: 'Temperature, Humidity, Pressure'
-                    },
-                    tooltip: {
-                        trigger: 'axis'
-                    },
-                    legend: {
-                        data: ['Temperature', 'Humidity', 'Pressure']
-                    },
-                    xAxis: {
-                        type: 'category',
-                        data: data['time']
-                    },
-                    yAxis: {
-                        type: 'value'
-                    },
-                    series: [
-                        {
-                            name: 'Temperature',
-                            type: 'line',
-                            data: tempData
-                        },
-                        {
-                            name: 'Humidity',
-                            type: 'line',
-                            data: humidData
-                        },
-                        {
-                            name: 'Pressure',
-                            type: 'line',
-                            data: pressData
-                        }
-                    ]
-                };
-                
-
-                chart.setOption(option);
-                chartNormalized.setOption(optionNormalized);
-
-                if (data.alerts && data.alerts.length > 0) {
-                    alert(data.alerts.join("\n")); // Display alerts if any
-                }
-            }).catch(error => {
-                console.error('Error fetching data:', error);
-            });
-        }
-
-        fetchData();
-        setInterval(fetchData, 5000); // Refresh data every 5 seconds
-    </script>
+    setInterval(() => {
+      fetch('http://127.0.0.1:5000/data')
+      .then(response => response.json())
+      .then(data => {
+        g.refresh(data.temp);  // Assuming 'temp' is the value you want to display
+      })
+      .catch(error => console.error('Error fetching data:', error));
+    }, 1000);
+  });
+</script>
 </body>
 </html>
