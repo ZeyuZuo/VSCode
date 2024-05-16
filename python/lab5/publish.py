@@ -7,17 +7,17 @@ import time
 broker = '127.0.0.1'  # MQTT代理服务器的IP地址
 port = 1883  # MQTT使用的端口号，默认为1883
 topics = {
-    "sensor/temperature": "sensor/temperature",
-    "sensor/humidity": "sensor/humidity",
-    "sensor/pressure": "sensor/pressure"
+    "temperature": "temperature",
+    "humidity": "humidity",
+    "pressure": "pressure"
 }  # MQTT主题，用于发布消息
 client_id = f'python-mqtt-{random.randint(0, 1000)}'  # 客户端ID，随机生成以避免冲突
 
 def generate_sensor_data():
     data = {
-        "sensor/temperature": random.uniform(20.0, 30.0),  # 模拟温度数据，单位摄氏度
-        "sensor/humidity": random.uniform(30.0, 90.0),  # 模拟湿度数据，百分比
-        "sensor/pressure": random.uniform(1000.0, 1020.0)  # 模拟气压数据，单位hPa
+        "temperature": random.uniform(20.0, 30.0),  # 模拟温度数据，单位摄氏度
+        "humidity": random.uniform(30.0, 90.0),  # 模拟湿度数据，百分比
+        "pressure": random.uniform(1000.0, 1020.0)  # 模拟气压数据，单位hPa
     }
     return data
 

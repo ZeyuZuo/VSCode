@@ -9,9 +9,9 @@ from dingtalkchatbot.chatbot import DingtalkChatbot
 broker = '127.0.0.1'
 port = 1883
 topics = {
-    "sensor/temperature": "sensor/temperature",
-    "sensor/humidity": "sensor/humidity",
-    "sensor/pressure": "sensor/pressure"
+    "temperature": "temperature",
+    "humidity": "humidity",
+    "pressure": "pressure"
 }
 client_id = f'subscribe-{random.randint(0, 100)}'
 
