@@ -41,6 +41,8 @@ def connect_mqtt() -> mqtt_client:
 def store_data(sensor_type, value):
     try:
         conn = mysql.connector.connect(**db_config)
+        # sensor_type去掉引号
+        sensor_type = sensor_type.replace("'", "")
         cursor = conn.cursor()
         query = "INSERT INTO %s VALUES (%s)"
         cursor.execute(query, (sensor_type, value))
