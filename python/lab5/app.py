@@ -17,10 +17,11 @@ db_config = {
     'raise_on_warnings': True
 }
 
-def get_data():
+def get_data(type):
     conn = mysql.connector.connect(**db_config)
     cursor = conn.cursor()
-    cursor.execute("SELECT sensor_type, value FROM sensor_data LIMIT 1")
+    mysql = "SELECT value FROM %s ORDERED BY id DESC LIMIT 1"
+    cursor.execute(mysql, (type))
     data = cursor.fetchall()
     conn.close()
     return data
@@ -32,15 +33,16 @@ def add_cors_headers(response):
 
 @app.route('/data')
 def data():
-    sensor_data = get_data()
-    result = {'sensor/temperature': [], 'sensor/humidity': [], 'sensor/pressure': [], 'alerts': []}
-    alerts = []
-    for timestamp, sensor_type, value in sensor_data:
-        formatted_timestamp = timestamp.strftime('%Y-%m-%d %H:%M:%S')
-        result[sensor_type].append({'timestamp': formatted_timestamp, 'value': value})
+    temperature = get_data("temperature")
+    humidity = get_data("humidity")
+    pressure = get_data("pressure")
+
+    result = {
+        "temperature": temperature[0][0],
+        "humidity": humidity[0][0],
+        "pressure": pressure[0][0]
+    }
     
-    if alerts:
-        result['alerts'] = alerts
     return jsonify(result)
 
 if __name__ == '__main__':
