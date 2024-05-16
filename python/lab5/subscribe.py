@@ -45,7 +45,7 @@ def store_data(sensor_type, value):
         sensor_type = sensor_type.replace("'", "")
         cursor = conn.cursor()
         
-        query = "INSER INTO" + sensor_type + "value VLAUES(" + value + ")"
+        query = "INSER INTO" + sensor_type + "value VLAUES(" + str(value) + ")"
         print(query)
         cursor.execute(query)
         conn.commit()
