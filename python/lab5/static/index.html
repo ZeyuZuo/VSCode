@@ -59,7 +59,7 @@
                             type: 'gauge',
                             detail: {formatter: '{value}°C'},
                             center: ['25%', '50%'],
-                            size: '50%',
+                            radius: '50%',
                             data: [{value: tempData, name: 'Temperature'}]
                         },
                         {
@@ -67,7 +67,7 @@
                             type: 'gauge',
                             detail: {formatter: '{value}%'},
                             center: ['50%', '50%'],
-                            size: '50%',
+                            radius: '50%',
                             data: [{value: humidData, name: 'Humidity'}]
                         },
                         {
@@ -75,7 +75,7 @@
                             type: 'gauge',
                             detail: {formatter: '{value}hPa'},
                             center: ['75%', '50%'],
-                            size: '50%',
+                            radius: '50%',
                             data: [{value: pressData, name: 'Pressure'}]
                         }
                     ]
@@ -88,7 +88,7 @@
         }
 
         fetchData();
-        setInterval(fetchData, 5000); // Refresh data every 5 seconds
+        setInterval(fetchData, 1000); // Refresh data every 5 seconds
     </script>
 </body>
 </html>
