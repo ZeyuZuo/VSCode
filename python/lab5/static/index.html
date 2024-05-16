@@ -50,29 +50,44 @@
                 // var normalizedHumid = normalize(humidData);
                 // var normalizedPress = normalize(pressData);
 
-                // 添加一个仪表盘
+                // 添加一个仪表盘，三个分别居于居于左中右
                 chart.setOption({
+                    title: {
+                        text: 'Sensor Data Visualization',
+                        subtext: 'Temperature, Humidity, Pressure'
+                    },
+                    tooltip: {
+                        trigger: 'axis'
+                    },
+                    legend: {
+                        data: ['Temperature', 'Humidity', 'Pressure']
+                    },
+                    xAxis: {
+                        type: 'category',
+                        data: data['time']
+                    },
+                    yAxis: {
+                        type: 'value'
+                    },
                     series: [
                         {
                             name: 'Temperature',
-                            type: 'gauge',
-                            detail: {formatter: '{value}°C'},
-                            data: [{value: tempData[tempData.length - 1], name: 'Temperature'}]
+                            type: 'line',
+                            data: tempData
                         },
                         {
                             name: 'Humidity',
-                            type: 'gauge',
-                            detail: {formatter: '{value}%'},
-                            data: [{value: humidData[humidData.length - 1], name: 'Humidity'}]
+                            type: 'line',
+                            data: humidData
                         },
                         {
                             name: 'Pressure',
-                            type: 'gauge',
-                            detail: {formatter: '{value}hPa'},
-                            data: [{value: pressData[pressData.length - 1], name: 'Pressure'}]
+                            type: 'line',
+                            data: pressData
                         }
                     ]
                 });
+
 
             }).catch(error => {
                 console.error('Error fetching data:', error);
