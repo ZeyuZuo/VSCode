@@ -59,21 +59,21 @@
                             type: 'gauge',
                             detail: {formatter: '{value}°C'},
                             center: ['25%', '50%'],
-                            data: [{value: tempData[tempData.length - 1], name: 'Temperature'}]
+                            data: [{value: tempData, name: 'Temperature'}]
                         },
                         {
                             name: 'Humidity',
                             type: 'gauge',
                             detail: {formatter: '{value}%'},
                             center: ['50%', '50%'],
-                            data: [{value: humidData[humidData.length - 1], name: 'Humidity'}]
+                            data: [{value: humidData, name: 'Humidity'}]
                         },
                         {
                             name: 'Pressure',
                             type: 'gauge',
                             detail: {formatter: '{value}hPa'},
                             center: ['75%', '50%'],
-                            data: [{value: pressData[pressData.length - 1], name: 'Pressure'}]
+                            data: [{value: pressData, name: 'Pressure'}]
                         }
                     ]
                 });
