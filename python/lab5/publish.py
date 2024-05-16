@@ -45,7 +45,7 @@ def publish(client):
                     print(f"Send `{message}` to topic `{topic}`")
                 else:
                     print(f"Failed to send message to topic {topic}")
-            time.sleep(5)  # 每5秒发送一次数据
+            time.sleep(1)  # 每5秒发送一次数据
     except KeyboardInterrupt:
         print("Publishing stopped by user")
 
