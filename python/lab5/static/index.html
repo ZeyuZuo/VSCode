@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.bootcdn.net/ajax/libs/echarts/5.0.2/echarts.min.js"></script>
+    <title>Sensor Data Visualization</title>
+    <style>
+        body {
+            background-image: url('./image/bg.jpg'); 
+            background-size: cover; 
+            background-position: center; 
+            background-repeat: no-repeat; 
+        }
+        #main, #mainNormalized {
+            width: 49%;
+            height: 600px;
+            display: inline-block;
+            vertical-align: top;
+        }
+    </style>
+</head>
+<body>
+    <div id="main"></div>
+    <div id="mainNormalized"></div>
+    <script>
+        var chart = echarts.init(document.getElementById('main'));
+        var chartNormalized = echarts.init(document.getElementById('mainNormalized'));
+
+        function fetchData() {
+            // Headers = new Headers({
+            //     'Access-Control-Allow-Origin': '*',
+            //     'Content-Type': 'application/json'
+            // });
+            // Response body is not available to scripts (Reason: CORS Missing Allow Origin)
+            fetch('http://127.0.0.1:5000/data').then(response => response.json()).then(data => {
+                console.log(data); 
+                function normalize(values) {
+                    let max = Math.max(...values);
+                    let min = Math.min(...values);
+                    if (max === min) return values.map(() => 0);
+                    return values.map(value => (value - min) / (max - min));
+                }
+
+                var timestamps = data['sensor/temperature'].map(item => item.timestamp);
+                var tempData = data['sensor/temperature'].map(item => item.value);
+                var humidData = data['sensor/humidity'].map(item => item.value);
+                var pressData = data['sensor/pressure'].map(item => item.value);
+
+                var normalizedTemp = normalize(tempData);
+                var normalizedHumid = normalize(humidData);
+                var normalizedPress = normalize(pressData);
+
+                var option = {
+                    tooltip: { trigger: 'axis' },
+                    legend: { data: ['Temperature', 'Humidity', 'Pressure'] },
+                    xAxis: {
+                        type: 'category',
+                        data: timestamps,
+                        axisLabel: { rotate: 45 }
+                    },
+                    yAxis: { type: 'value' },
+                    series: [
+                        { name: 'Temperature', type: 'line', data: tempData },
+                        { name: 'Humidity', type: 'line', data: humidData },
+                        { name: 'Pressure', type: 'line', data: pressData }
+                    ]
+                };
+
+                var optionNormalized = {
+                    tooltip: { trigger: 'axis' },
+                    legend: { data: ['Normalized Temperature', 'Normalized Humidity', 'Normalized Pressure'] },
+                    xAxis: {
+                        type: 'category',
+                        data: timestamps,
+                        axisLabel: { rotate: 45 }
+                    },
+                    yAxis: { type: 'value' },
+                    series: [
+                        { name: 'Normalized Temperature', type: 'line', data: normalizedTemp },
+                        { name: 'Normalized Humidity', type: 'line', data: normalizedHumid },
+                        { name: 'Normalized Pressure', type: 'line', data: normalizedPress }
+                    ]
+                };
+
+                chart.setOption(option);
+                chartNormalized.setOption(optionNormalized);
+
+                if (data.alerts && data.alerts.length > 0) {
+                    alert(data.alerts.join("\n")); // Display alerts if any
+                }
+            }).catch(error => {
+                console.error('Error fetching data:', error);
+            });
+        }
+
+        fetchData();
+        setInterval(fetchData, 5000); // Refresh data every 5 seconds
+    </script>
+</body>
+</html>

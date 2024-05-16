@@ -20,17 +20,10 @@ db_config = {
 def get_data():
     conn = mysql.connector.connect(**db_config)
     cursor = conn.cursor()
-    cursor.execute("SELECT timestamp, sensor_type, value FROM sensor_data ORDER BY timestamp DESC")
+    cursor.execute("SELECT sensor_type, value FROM sensor_data LIMIT 1")
     data = cursor.fetchall()
     conn.close()
     return data
-
-def send_dingtalk_message(message, sensor_type, timestamp, value):
-    webhook = 'https://oapi.dingtalk.com/robot/send?access_token=54803e6bdc1a0bc438ecc97c1ace78f2eb7dfe101298ab24682618429cc0c320'
-    secret = 'SECbc64bc7f21cc7aba5cb444dbdedfd82b14aea021229f654c22c199a255c39cd5'  # 可选：创建机器人勾选“加签”选项时使用
-    xiaoding = DingtalkChatbot(webhook, secret=secret)
-    msg = 'Alert: ' + message + ' at ' + timestamp.strftime('%Y-%m-%d %H:%M:%S') + ' is ' + str(value) + ' !'
-    xiaoding.send_text(msg=msg)
 
 @app.after_request
 def add_cors_headers(response):
