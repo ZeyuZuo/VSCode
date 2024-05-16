@@ -15,9 +15,9 @@ client_id = f'python-mqtt-{random.randint(0, 1000)}'  # 客户端ID，随机生�
 
 def generate_sensor_data():
     data = {
-        "temperature": random.uniform(20.0, 30.0),  # 模拟温度数据，单位摄氏度
-        "humidity": random.uniform(30.0, 90.0),  # 模拟湿度数据，百分比
-        "pressure": random.uniform(1000.0, 1020.0)  # 模拟气压数据，单位hPa
+        "temperature": round(random.uniform(20.0, 30.0), 2),  # 模拟温度数据，单位摄氏度
+        "humidity": round(random.uniform(30.0, 90.0), 2),  # 模拟湿度数据，百分比
+        "pressure": round(random.uniform(1000.0, 1020.0), 2)  # 模拟气压数据，单位hPa, 两位小数
     }
     return data
 
