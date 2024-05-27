@@ -1,14 +1,10 @@
 /**
  * @author: Zeyu Zuo
- * @date: 2024-05-14 16:52:18
+ * @date: 2024-05-27 19:21:36
  */
-#include <iostream>
-#include <vector>
-#include <algorithm>
-#include <ctime>
-#include <cstdlib>
-
+#include<bits/stdc++.h>
 using namespace std;
+typedef long long LL;
 
 struct Item {
     int weight;
